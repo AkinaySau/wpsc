@@ -1,0 +1,26 @@
+{
+	"name": "sau/wpsc",
+	"description": "description_text",
+	"minimum-stability": "stable",
+	"license": "proprietary",
+	"authors": [
+		{
+			"name": "Akinay Sau",
+			"email": "akinaysau@gmail.com",
+			"role": "Developer",
+			"homepage": "http://a-sau.ru"
+		}
+	],
+	"require": {
+		"php": "7.*",
+		"twig/twig": "2.4.*"
+	},
+	"autoload": {
+		"psr-4": {
+			"Sau\\WP\\WPSC\\": "src/"
+		},
+		"files": [
+			"loader.php"
+		]
+	}
+}
