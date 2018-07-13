@@ -1,0 +1,11 @@
+@import "vars";
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-vue/dist/bootstrap-vue.css';
+
+#wpwrap {
+	background: $backgroung;
+}
+
+.wrap {
+	outline: 1px solid $gray-500;
+}

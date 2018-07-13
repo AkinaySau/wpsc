@@ -1,0 +1,1 @@
+require(__dirname + '/scss/style.scss');
