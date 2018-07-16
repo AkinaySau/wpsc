@@ -11,7 +11,7 @@ use Sau\WP\WPSC\Config\Model;
 use Sau\WP\WPSC\KernelSimpleComposer;
 
 /**
- * For configure plugin in theme and block config after load theme
+ * For configure plugin in theme and block Config after load theme
  */
 add_action( 'after_setup_theme', function () {
 	do_action( 'wpsc_before_init' );

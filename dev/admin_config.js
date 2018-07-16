@@ -1,8 +1,8 @@
 import './scss/style.scss';
 import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
-import App from './config/App.vue';
-import Logs from './config/Logs.vue';
+import App from './Config/App.vue';
+import Logs from './Config/Logs.vue';
 
 // import 'bootstrap-vue/src/';
 

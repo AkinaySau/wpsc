@@ -12,7 +12,7 @@
 </template>
 
 <script>
-	import CheckboxListField from './Components/CheckboxListField.vue';
+	import CheckboxListField from '../Components/CheckboxListField.vue';
 
 	export default {
 		name: 'App',

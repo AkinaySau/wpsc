@@ -23,7 +23,7 @@ class AdminMenu {
 
 	/**
 	 * AdminMenu constructor.
-	 * Create menu item for config page
+	 * Create menu item for Config page
 	 *
 	 * @param AdminPage $page
 	 *

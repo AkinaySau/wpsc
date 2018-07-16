@@ -16,7 +16,7 @@ final class DEFINES {
 	const NAME_PLUGIN = 'wpsc';
 
 	/**
-	 * Name config page
+	 * Name Config page
 	 */
 	const NAME_PLUGIN_CONFIG_PAGE = self::NAME_PLUGIN;
 

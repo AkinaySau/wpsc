@@ -4,10 +4,12 @@
 .DS_Store
 Thumbs.db
 .idea/
+composer.phar
 
 # Theme
 node_modules/
 vendor/
 composer.lock
+package-lock.json
 assets/components/
 dist/
