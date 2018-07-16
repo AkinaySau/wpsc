@@ -12,4 +12,5 @@ vendor/
 composer.lock
 package-lock.json
 assets/components/
+assets/
 dist/
