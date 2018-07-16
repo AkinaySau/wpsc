@@ -24,7 +24,14 @@ class AdminPage {
 
 	public function render() {
 		$options = json_encode( $this->model );
-		echo "<div class='wrap'><div id='wpsc_vue_app' data-options'{$options}'></div></div>";
+		$logs    = json_encode( [
+			'namespace' => Config::getCollector()
+			                     ->getCollection()
+		] );
+		echo "<div class='wrap container-fluid'>";
+		echo "<div id='wpsc_vue_app' data-options'{$options}'></div>";
+		echo "<div id='wpsc_vue_logs' data-logs='{$logs}'></div>";
+		echo "</div>";
 	}
 
 	protected function includeScript() {

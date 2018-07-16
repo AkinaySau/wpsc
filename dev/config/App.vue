@@ -1,14 +1,15 @@
 <template>
-	<div class="container-fluid" id="wpsc_app">
-		<div class="row">
+	<div class="row" id="wpsc_app">
 
-		</div>
 	</div>
 </template>
 
 <script>
 	export default {
 		name: 'App',
+		data: function() {
+			return {};
+		},
 	};
 </script>
 
