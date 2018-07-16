@@ -8,7 +8,6 @@
 
 namespace Sau\WP\WPSC\Config;
 
-
 class Console {
 
 }

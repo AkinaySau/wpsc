@@ -1,6 +1,5 @@
 <template>
 	<div class="row">
-
 		<table class="table table-dark table-striped table-sm">
 			<thead>
 			<tr>
@@ -25,7 +24,6 @@
 				logs: JSON.parse(this.$parent.$data.logs),
 			};
 		},
-
 	};
 </script>
 

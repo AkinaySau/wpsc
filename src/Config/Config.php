@@ -19,7 +19,8 @@ class Config {
 	private static $collector;
 
 	public function __construct() {
-		static::$model     = new Model();
+		static::$model = new Model();
+		$this->save();
 		static::$collector = new Collection();
 		$admin_page        = new AdminPage( static::$model );
 		$admin_menu        = new AdminMenu( $admin_page );
@@ -30,6 +31,12 @@ class Config {
 	 */
 	public static function getCollector(): Collection {
 		return self::$collector;
+	}
+
+	final private function save() {
+		if ( isset( $_POST[ 'wpsc' ][ 'save' ] ) ) {
+
+		}
 	}
 
 	/**

@@ -9,6 +9,8 @@
 namespace Sau\WP\WPSC\Config;
 
 use Sau\WP\WPSC\DEFINES;
+use Sau\WP\WPSC\Fields\CheckboxListField;
+use Sau\WP\WPSC\Helpers\PostHelper;
 
 /**
  * For load and save options
@@ -77,6 +79,27 @@ class Model {
 	 */
 	public static function getOptionName( string $property ): string {
 		return DEFINES::OPTION_PREFIX . $property;
+	}
+
+	public function form() {
+		$form = [];
+		foreach ( $this->getVars() as $key => $vars ) {
+			switch ( $key ):
+				case 'post_types':
+
+					$field  = ( new CheckboxListField( $key ) )->setValue( $vars )
+					                                           ->setLabel( __( 'Using for post type', DEFINES::TRANSLATE_DOMAIN ) )
+					                                           ->setList( PostHelper::getPostTypes() );
+					$form[] = $field->getVueJson();
+					break;
+				default:
+
+					break;
+			endswitch;
+
+		}
+
+		return $form;
 	}
 
 }

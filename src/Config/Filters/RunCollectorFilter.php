@@ -20,7 +20,7 @@ class RunCollectorFilter {
 	/**
 	 * @var array
 	 */
-	private $collection;
+	private static $collection;
 
 	public function __construct() {
 		$this->add( 'theme_particles', get_stylesheet_directory() . DS . 'particles' );
@@ -35,11 +35,11 @@ class RunCollectorFilter {
 	 *
 	 * @return bool
 	 */
-	public function add( $namespace, $path, $rewrite = true ) {
-		if ( ! $rewrite && array_key_exists( $namespace, $this->collection ) ) {
+	public   function add( $namespace, $path, $rewrite = true ) {
+		if ( ! $rewrite && array_key_exists( $namespace, static::$collection ) ) {
 			return false;
 		}
-		$this->collection[ $namespace ] = [
+		static::$collection[ $namespace ] = [
 			'namespace' => $namespace,
 			'path'      => $path
 		];
@@ -57,7 +57,7 @@ class RunCollectorFilter {
 		 */
 		$this->add( 'wpsc', DEFINES::PLUGIN_DIR_PATH . 'particles' );
 
-		$collection = $this->collection;
+		$collection = static::$collection;
 
 		return $collection;
 

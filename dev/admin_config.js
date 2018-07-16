@@ -1,24 +1,17 @@
 import './scss/style.scss';
-
-import 'bootstrap-vue/src/';
-
 import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
-
-Vue.use(BootstrapVue);
-
 import App from './config/App.vue';
 import Logs from './config/Logs.vue';
+
+// import 'bootstrap-vue/src/';
+
+Vue.use(BootstrapVue);
 
 window.onload = function() {
 	new Vue({
 		el: '#wpsc_vue_app',
 		render: h => h(App),
-
-		// beforeMount: function() {
-		// 	this.configs = JSON.parse(
-		// 		this.$el.attributes['data-options'].value);
-		// },
 	});
 
 	new Vue({
@@ -33,5 +26,6 @@ window.onload = function() {
 			this.logs = this.$el.attributes['data-logs'].value;
 		},
 	});
+
 	console.log('config.ok');
 };

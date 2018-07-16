@@ -23,15 +23,20 @@ class AdminPage {
 	}
 
 	public function render() {
-		$options = json_encode( $this->model );
-		$logs    = json_encode( [
+		$logs = json_encode( [
 			'namespace' => Config::getCollector()
 			                     ->getCollection()
 		] );
-		echo "<div class='wrap container-fluid'>";
-		echo "<div id='wpsc_vue_app' data-options'{$options}'></div>";
+
+		echo "<div class='wrap'><div class='container-fluid'>";
+		echo $options = $this->model->form();
+		echo "<div id='wpsc_vue_app'></div>";
 		echo "<div id='wpsc_vue_logs' data-logs='{$logs}'></div>";
-		echo "</div>";
+
+		echo '<pre>';
+		print_r( $options );
+		echo '</pre>';
+		echo "</div></div>";
 	}
 
 	protected function includeScript() {
@@ -39,6 +44,8 @@ class AdminPage {
 			if ( $_GET[ 'page' ] === DEFINES::NAME_PLUGIN_CONFIG_PAGE ) {
 				wp_enqueue_script( DEFINES::ADMIN_SCRIPT_HANDLE, DEFINES::PLUGIN_DIR_URL . "assets/js/admin_config.min.js" );
 				wp_enqueue_style( DEFINES::ADMIN_STYLESHEET_HANDLE, DEFINES::PLUGIN_DIR_URL . 'assets/css/admin_config.css' );
+				$data = json_encode( $this->model->form() );
+				wp_add_inline_script( DEFINES::ADMIN_SCRIPT_HANDLE, "window.wpsc_options = {$data}", 'before' );
 			}
 		} );
 	}
