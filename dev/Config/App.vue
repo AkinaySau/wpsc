@@ -9,7 +9,7 @@
 
 <script>
 	import CheckboxListField from '../Components/CheckboxListField.vue';
-	import Hidden from '../Components/Hidden.vue';
+	import Hidden from '../Components/HiddenField.vue';
 
 	export default {
 		name: 'App',

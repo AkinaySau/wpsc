@@ -1,11 +1,13 @@
 const webpackModeBoolean = process.env.NODE_ENV !== 'production';
-const webpackMode = webpackModeBoolean !== 'production' ? 'development' : 'production';
-const miniCssExtractPlugin = require("mini-css-extract-plugin");
-const uglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const optimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const webpackMode = webpackModeBoolean !== 'production' ?
+	'development' :
+	'production';
+const miniCssExtractPlugin = require('mini-css-extract-plugin');
+const uglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const optimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const cleanWebpackPlugin = require('clean-webpack-plugin');
 const vueLoaderPlugin = require('vue-loader/lib/plugin');
-
+const webpack = require('webpack');
 
 let path = require('path');
 let autoPrefixer = require('autoprefixer');
@@ -14,22 +16,26 @@ let plugins = {
 	autoPrefixer() {
 		return autoPrefixer({
 			browsers: [
-				"Android 2.3",
-				"Android >= 4",
-				"Chrome >= 20",
-				"Firefox >= 24",
-				"Explorer >= 8",
-				"iOS >= 6",
-				"Opera >= 12",
-				"Safari >= 6"
-			]
-		})
+				'Android 2.3',
+				'Android >= 4',
+				'Chrome >= 20',
+				'Firefox >= 24',
+				'Explorer >= 8',
+				'iOS >= 6',
+				'Opera >= 12',
+				'Safari >= 6',
+			],
+		});
 	},
 	miniCssExtractPlugin: new miniCssExtractPlugin({
-		filename: "/../css/[name].css",
+		filename: '/../css/[name].css',
 	}),
 	cleanWebpackPlugin: new cleanWebpackPlugin('dist', {}),
-	vueLoaderPlugin: new vueLoaderPlugin()
+	vueLoaderPlugin: new vueLoaderPlugin(),
+	providerPlugin: new webpack.ProvidePlugin({
+		'$': 'jquery',
+		// 'Sau': ['/var/www/html/sau/vue/nicGen/lib/Sau.js'],
+	}),
 };
 
 let modules = {
@@ -39,11 +45,11 @@ let modules = {
 			use: {
 				loader: 'babel-loader',
 				options: {
-					presets: ["es2015"]
-				}
+					presets: ['es2015'],
+				},
 			},
-			exclude: /node_modules/
-		}
+			exclude: /node_modules/,
+		};
 	},
 	style() {
 		return {
@@ -56,20 +62,20 @@ let modules = {
 					loader: 'postcss-loader',
 					options: {
 						plugins: [
-							plugins.autoPrefixer()
+							plugins.autoPrefixer(),
 						],
-						sourceMap: true
-					}
+						sourceMap: true,
+					},
 				},
 				'sass-loader',
 			],
-		}
+		};
 	},
 	vue() {
 		return {
 			test: /\.vue$/,
-			loader: 'vue-loader'
-		}
+			loader: 'vue-loader',
+		};
 	},
 	images() {
 		return {
@@ -80,11 +86,11 @@ let modules = {
 					options: {
 						name: '[name].[ext]',
 						publicPath: '../images/',
-						outputPath: '../images/'
-					}
-				}
-			]
-		}
+						outputPath: '../images/',
+					},
+				},
+			],
+		};
 	},
 	media() {
 		return {
@@ -95,11 +101,11 @@ let modules = {
 					options: {
 						name: '[name].[ext]',
 						publicPath: '../media/',
-						outputPath: '../media/'
-					}
-				}
-			]
-		}
+						outputPath: '../media/',
+					},
+				},
+			],
+		};
 	},
 	fonts() {
 		return {
@@ -110,12 +116,12 @@ let modules = {
 					options: {
 						name: '[name].[ext]',
 						publicPath: '../fonts/',
-						outputPath: '../fonts/'
-					}
-				}
-			]
-		}
-	}
+						outputPath: '../fonts/',
+					},
+				},
+			],
+		};
+	},
 
 };
 module.exports = {
@@ -123,24 +129,24 @@ module.exports = {
 	target: 'web',
 	mode: webpackMode,
 	entry: {
-		"admin_config": path.join(__dirname, 'dev/admin_config.js'),
-		"admin_editor": path.join(__dirname, 'dev/admin_editor.js'),
+		'admin_config': path.join(__dirname, 'dev/admin_config.js'),
+		'admin_editor': path.join(__dirname, 'dev/admin_editor.js'),
 	},
 	optimization: {
 		minimizer: [
 			new uglifyJsPlugin({
 				cache: true,
 				parallel: true,
-				sourceMap: true // set to true if you want JS source maps
+				sourceMap: true, // set to true if you want JS source maps
 			}),
-			new optimizeCSSAssetsPlugin({})
+			new optimizeCSSAssetsPlugin({}),
 		],
 	},
 	output: {
 		path: path.join(__dirname, '/assets/js'),
 		publicPath: '/assets/',
 		filename: '[name].min.js',
-		library: '[name]'
+		library: '[name]',
 	},
 	module: {
 		rules: [
@@ -151,11 +157,12 @@ module.exports = {
 			modules.images(),
 			modules.media(),
 			modules.fonts(),
-		]
+		],
 	},
 	plugins: [
 		plugins.cleanWebpackPlugin,
 		plugins.miniCssExtractPlugin,
-		plugins.vueLoaderPlugin
+		plugins.vueLoaderPlugin,
+		plugins.providerPlugin,
 	],
 };

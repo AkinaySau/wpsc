@@ -40,6 +40,15 @@ final class DEFINES {
 	const ADMIN_STYLESHEET_HANDLE = self::NAME_PLUGIN;
 
 	/**
+	 * Work script-name for admin panel
+	 */
+	const ADMIN_SCRIPT_HANDLE_EDITOR = self::NAME_PLUGIN.'_editor';
+	/**
+	 * Work stylesheet-name for admin panel
+	 */
+	const ADMIN_STYLESHEET_HANDLE_EDITOR = self::NAME_PLUGIN.'_editor';
+
+	/**
 	 * Abs path to this plugin
 	 */
 	const PLUGIN_DIR_PATH = WPSC_PLUGIN_DIR_PATH;

@@ -11,5 +11,5 @@ namespace Sau\WP\WPSC\Fields;
 
 class HiddenField extends Field {
 
-	protected $type = 'Hidden';
+	protected $type = 'HiddenField';
 }

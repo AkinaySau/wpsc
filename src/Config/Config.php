@@ -8,6 +8,8 @@
 
 namespace Sau\WP\WPSC\Config;
 
+use stdClass;
+
 class Config {
 	/**
 	 * @var Model
@@ -45,10 +47,15 @@ class Config {
 	}
 
 	/**
-	 * @return Model
+	 * Get options
+	 * @return stdClass
 	 */
-	//	public static function getModel(): Model {
-	//		return self::$model;
-	//	}
+	public static function getConfigs() {
+		$configs             = new stdClass();
+		$configs->options    = static::$model->getVars();
+		$configs->namespaces = static::$collector->getCollection();
+
+		return $configs;
+	}
 
 }
