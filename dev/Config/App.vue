@@ -1,11 +1,7 @@
 <template>
 	<div class="row" id="wpsc_app">
 		<b-form :action="getAction()" :method="form.method">
-
-			<div v-for="field in options">
-				<CheckboxListField :field="field" v-if="field.type ==='CheckboxListField'" />
-			</div>
-
+			<component :is="field.type" :field="field" :key="key" v-for="(field,key) in options" />
 			<b-button :variant="form.submitButton.variant" type="submit">Submit</b-button>
 		</b-form>
 	</div>
@@ -13,14 +9,14 @@
 
 <script>
 	import CheckboxListField from '../Components/CheckboxListField.vue';
+	import Hidden from '../Components/Hidden.vue';
 
 	export default {
 		name: 'App',
-		components: {CheckboxListField},
+		components: {Hidden, CheckboxListField},
 		data() {
 			return {
-				alerts: window.wpsc_alerts,
-				options: window.wpsc_options,
+				options: window.wpsc_options.fields,
 				method: 'post',
 				form: {
 					method: 'post',

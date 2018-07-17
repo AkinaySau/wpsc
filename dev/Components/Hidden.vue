@@ -1,16 +1,23 @@
 <template>
-	<input type="hidden" :name="{{}}">
+	<div>
+		<input type="hidden" :name="field.name" v-model="field.value">
+	</div>
 </template>
 
 <script>
-	import Field from '../modules/field.module';
 
 	export default {
 		name: 'Hidden',
 		props: {
-			name: {
-				type: Field,
-
+			field: {
+				type: Object,
+				default: {
+					name: 'tmp',
+					value: '',
+					label: '',
+					help: '',
+				},
+				required: true,
 			},
 		},
 	};

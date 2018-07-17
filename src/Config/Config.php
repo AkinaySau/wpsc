@@ -35,7 +35,12 @@ class Config {
 
 	final private function save() {
 		if ( isset( $_POST[ 'wpsc' ][ 'save' ] ) ) {
-
+			foreach ( $_POST[ 'wpsc' ] as $key => $value ) {
+				if ( property_exists( static::$model, $key ) ) {
+					static::$model->$key = $value;
+				}
+			}
+			self::$model->save();
 		}
 	}
 

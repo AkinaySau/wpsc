@@ -22,11 +22,6 @@
 				required: true
 			},
 		},
-		methods: {
-			field_log() {
-				console.log(this.field);
-			},
-		},
 	};
 </script>
 

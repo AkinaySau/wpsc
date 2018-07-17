@@ -10,6 +10,7 @@ namespace Sau\WP\WPSC\Config;
 
 use Sau\WP\WPSC\DEFINES;
 use Sau\WP\WPSC\Fields\CheckboxListField;
+use Sau\WP\WPSC\Fields\HiddenField;
 use Sau\WP\WPSC\Helpers\PostHelper;
 
 /**
@@ -82,15 +83,18 @@ class Model {
 	}
 
 	public function form() {
-		$form = [];
+		$form = [
+			'fields' => [],
+			'alerts' => []
+		];
 		foreach ( $this->getVars() as $key => $vars ) {
 			switch ( $key ):
 				case 'post_types':
 
-					$field  = ( new CheckboxListField( $key ) )->setValue( $vars )
-					                                                  ->setLabel( __( 'Using for post type', DEFINES::TRANSLATE_DOMAIN ) )
-					                                                  ->setList( PostHelper::getPostTypes() );
-					$form[] = $field->getVueJson();
+					$field                    = ( new CheckboxListField( $key ) )->setValue( $vars )
+					                                                             ->setLabel( __( 'Using for post type', DEFINES::TRANSLATE_DOMAIN ) )
+					                                                             ->setList( PostHelper::getPostTypes() );
+					$form[ 'fields' ][ $key ] = $field->getVueJson();
 					break;
 				default:
 
@@ -98,12 +102,9 @@ class Model {
 			endswitch;
 
 		}
+		$form[ 'fields' ][] = ( new HiddenField( 'save' ) )->setValue( 1 )
+		                                                   ->getVueJson();
 
 		return $form;
 	}
-
-	public function getAlerts() {
-		
-	}
-
 }

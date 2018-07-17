@@ -33,10 +33,6 @@ class AdminPage {
 
 		echo "<div id='wpsc_vue_app'></div>";
 		echo "<div id='wpsc_vue_logs' data-logs='{$logs}'></div>";
-
-		echo '<pre>';
-		print_r( $_POST );
-		echo '</pre>';
 		echo "</div></div>";
 	}
 

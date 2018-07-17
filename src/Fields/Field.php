@@ -19,7 +19,7 @@ abstract class Field {
 	protected $help  = '';
 
 	public function __construct( string $name ) {
-		$this->name = $name;
+		$this->name = "wpsc[$name]";
 	}
 
 	/**
