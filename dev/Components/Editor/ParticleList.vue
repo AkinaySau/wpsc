@@ -1,24 +1,40 @@
 <template>
-	<div class="particle-list particle-list__overlay" v-show="state">
-		<!--<div class="particle-list__overlay"></div>-->
-		<div class="particle-list__list">
-
+	<div id="wpsc_particle_modal" class="modal" role="dialog" v-if="particleModalStatus">
+		<div class="modal-overlay" @click="hideParticleList"></div>
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					{{particleModalStatus}}
+				</div>
+				<div class="modal-footer">
+					ss
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="js">
-	import {mapActions} from 'vuex';
+	import {mapState, mapActions, mapGetters} from 'vuex';
 
 	export default {
 		name: 'ParticleList',
-		// computed: mapState({
-		// 	particles: (state = this.$store.state) => state.particles,
-		// }),
-		methods: {
-			...mapActions({
-				particles: 'particles',
+		computed: mapState({
+			...mapGetters('particles', {
+				particleModalStatus: 'status',
 			}),
+			// ...mapState({
+			//
+			// })
+		}),
+
+		methods: {
+			...mapActions('particles',
+				{
+					showParticleList: 'show',
+					hideParticleList: 'hide',
+					particleConsole: 'console',
+				}),
 		},
 	}
 	;
@@ -27,13 +43,32 @@
 <style scoped lang="scss">
 	@import "../../scss/vars";
 
-	.particle-list {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-
-		&__overlay {
+	#wpsc_particle_modal {
+		display: block !important;
+		/*z-index: 9990 !important;*/
+		& .modal-overlay {
 			background: $backgroung;
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
 		}
 	}
 </style>
+
+position: absolute;
+width: 100%;
+height: 100%;
+
+&__overlay {
+background: $backgroung;
+opacity: 0.5;
+/*позиционируем и центрируем*/
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+margin: auto;
+}

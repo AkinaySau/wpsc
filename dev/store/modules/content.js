@@ -1,8 +1,13 @@
 'use strict';
-module.export = {
+export default {
+	namespaced: true,
 	state: {
-		content: $('[name=content]').val(),
+		content: ($) => $('[name=content]').val(),
 	},
-	// mutations: {},
-	// actions: {},
+	getters: {
+		content: state => state.content,
+
+	},
+	mutations: {},
+	actions: {},
 };
