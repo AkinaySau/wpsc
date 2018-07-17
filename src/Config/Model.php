@@ -88,8 +88,8 @@ class Model {
 				case 'post_types':
 
 					$field  = ( new CheckboxListField( $key ) )->setValue( $vars )
-					                                           ->setLabel( __( 'Using for post type', DEFINES::TRANSLATE_DOMAIN ) )
-					                                           ->setList( PostHelper::getPostTypes() );
+					                                                  ->setLabel( __( 'Using for post type', DEFINES::TRANSLATE_DOMAIN ) )
+					                                                  ->setList( PostHelper::getPostTypes() );
 					$form[] = $field->getVueJson();
 					break;
 				default:
@@ -100,6 +100,10 @@ class Model {
 		}
 
 		return $form;
+	}
+
+	public function getAlerts() {
+		
 	}
 
 }

@@ -1,12 +1,12 @@
 <template>
 	<div class="row" id="wpsc_app">
-		<b-form>
+		<b-form :action="getAction()" :method="form.method">
 
 			<div v-for="field in options">
-				<CheckboxListField :field="field" :key="field.name" v-if="field.type ==='CheckboxListField'" />
+				<CheckboxListField :field="field" v-if="field.type ==='CheckboxListField'" />
 			</div>
 
-
+			<b-button :variant="form.submitButton.variant" type="submit">Submit</b-button>
 		</b-form>
 	</div>
 </template>
@@ -19,8 +19,21 @@
 		components: {CheckboxListField},
 		data() {
 			return {
+				alerts: window.wpsc_alerts,
 				options: window.wpsc_options,
+				method: 'post',
+				form: {
+					method: 'post',
+					submitButton: {
+						variant: 'outline-primary',
+					},
+				},
 			};
+		},
+		methods: {
+			getAction() {
+				return window.location.href;
+			},
 		},
 	};
 </script>
