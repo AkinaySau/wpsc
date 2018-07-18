@@ -1,10 +1,16 @@
 <template>
 	<div id="wpsc_editor_app">
+		<!--it`s toolbar))-->
 		<Toolbar />
 
-
 		<ParticleList />
-		<div class="content">{{getContent}}</div>
+
+
+		<div class="content">
+			{{getContent}}
+
+			{{getTest}}
+		</div>
 	</div>
 </template>
 
@@ -23,7 +29,10 @@
 			};
 		},
 		computed: {
-			...mapGetters('content', {getContent: 'content'}),
+			...mapGetters('content', {
+				getContent: 'content',
+				getTest: 'test',
+			}),
 		},
 		methods: {},
 	};

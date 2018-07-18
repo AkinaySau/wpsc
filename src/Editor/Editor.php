@@ -18,13 +18,17 @@ class Editor {
 	 * @var array
 	 */
 	private $config;
+	/**
+	 * @var BuildEditor
+	 */
+	private $builder;
 
 	public function __construct() {
 		/**
 		 * Run only type
 		 */
-		$this->config = Config::getConfigs();
-
+		$this->config  = Config::getConfigs();
+		$this->builder = new BuildEditor($this->config->namespaces);
 		add_action( 'edit_form_after_title', [ $this, 'scripts' ] );
 	}
 
