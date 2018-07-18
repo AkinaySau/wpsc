@@ -3,14 +3,16 @@ export default {
 	namespaced: true,
 	state: {
 		status: false,
+		list: {},
 	},
 	mutations: {
 		show: state => state.status = true,
 		hide: state => state.status = false,
+		getList: (state, list) => state.list = list,
 	},
 	getters: {
 		status: state => state.status,
-
+		getList: state => state.list,
 	},
 	actions: {
 		show({commit}) {
@@ -19,8 +21,8 @@ export default {
 		hide({commit}) {
 			commit('hide');
 		},
-		console: () => {
-			console.log(this.state.status());
+		setupList: ({commit}, list) => {
+			commit('getList', list);
 		},
 	},
 };

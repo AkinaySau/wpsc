@@ -23,6 +23,16 @@ abstract class Field {
 	}
 
 	/**
+	 * Make method.
+	 * @param string $name
+	 *
+	 * @return Field
+	 */
+	public static function make( string $name) {
+		return new static($name);
+	}
+
+	/**
 	 * Generate valid json for vue field
 	 *
 	 * @param bool $json True return json else array

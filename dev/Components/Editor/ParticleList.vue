@@ -3,11 +3,16 @@
 		<div class="modal-overlay" @click="hideParticleList"></div>
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
-				<div class="modal-body">
+				<div class="modal-body" v-for="(fields,namespace,key) in list" :id="namespace+'_'+key">
+					<p>{{namespace}}</p>
+					<hr>
+					<b-list-group>
+						<b-list-group-item @click="" type="button" button v-for="field in fields">Button item</b-list-group-item>
+					</b-list-group>
 					{{particleModalStatus}}
 				</div>
 				<div class="modal-footer">
-					ss
+
 				</div>
 			</div>
 		</div>
@@ -15,13 +20,14 @@
 </template>
 
 <script lang="js">
-	import {mapState, mapActions, mapGetters} from 'vuex';
+	import {mapActions, mapGetters, mapState} from 'vuex';
 
 	export default {
 		name: 'ParticleList',
 		computed: mapState({
 			...mapGetters('particles', {
 				particleModalStatus: 'status',
+				list: 'getList',
 			}),
 			// ...mapState({
 			//
@@ -56,19 +62,3 @@
 		}
 	}
 </style>
-
-position: absolute;
-width: 100%;
-height: 100%;
-
-&__overlay {
-background: $backgroung;
-opacity: 0.5;
-/*позиционируем и центрируем*/
-position: absolute;
-top: 0;
-right: 0;
-bottom: 0;
-left: 0;
-margin: auto;
-}

@@ -13,11 +13,12 @@ class BuildEditor {
 	/**
 	 * @var array
 	 */
-	protected $fields     = [];
+	protected $rows       = [];
 	protected $namespaces = [];
 
 	public function __construct( $namespaces ) {
 		$this->scanNamespaces( $namespaces );
+		add_action( 'wpsc_before_include_editor_js', [ $this, 'script' ] );
 	}
 
 	/**
@@ -29,8 +30,15 @@ class BuildEditor {
 			$path      = $namespace[ 'path' ];
 			$namespace = $namespace[ 'namespace' ];
 			if ( is_dir( $path ) ) {
-				$this->namespaces[ $namespace ] = new RowsEditor( $namespace, $path );
+				$this->namespaces[ $namespace ] = ( new RowsEditor( $namespace, $path ) )->getVueJson();
 			}
 		}
+
 	}
+
+	public function script() {
+		$data = json_encode( $this->namespaces );
+		echo "<script type='text/javascript'>window.wpsc_particles=$data</script>";
+	}
+
 }

@@ -12,16 +12,26 @@ namespace Sau\WP\WPSC\Editor;
 use Sau\WP\WPSC\Fields\Field;
 
 class RowEditor {
-	protected $json;
-	protected $template;
+	protected $fields;
+
 	public function __construct( $fields ) {
 
-		$tmp=[];
+		$tmp = [];
 		foreach ( $fields as $field ) {
 			if ( ! $field instanceof Field ) {
 				continue;
 			}
 
+			$tmp[] = $field->getVueJson();
 		}
+		$this->fields = $tmp;
 	}
+
+	/**
+	 * @return array
+	 */
+	public function getFields(): array {
+		return $this->fields;
+	}
+
 }

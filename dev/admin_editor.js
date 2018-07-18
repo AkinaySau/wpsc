@@ -23,9 +23,13 @@ window.onload = function() {
 			...mapActions('content', {
 				setContent: 'set',
 			}),
+			...mapActions('particles', {
+				setupListParticles: 'setupList',
+			}),
 		},
 		beforeMount: function() {
 			this.setContent(window.wpsc_content);
+			this.setupListParticles(window.wpsc_particles);
 		},
 	});
 };

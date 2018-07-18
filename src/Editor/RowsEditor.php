@@ -9,8 +9,7 @@
 namespace Sau\WP\WPSC\Editor;
 
 
-use Sau\WP\WPSC\Helpers\ConsoleHelper;
-use Sau\WP\WPSC\Rows\Row;
+use Sau\WP\WPSC\Helpers\RowsHelper;
 
 class RowsEditor {
 	protected $namespace;
@@ -24,36 +23,37 @@ class RowsEditor {
 		$this->getRows();
 	}
 
-	protected function addRow( $path_to_fields ) {
-
-	}
-
 	/**
 	 * Collect all files in namespace
 	 */
 	protected function getRows() {
-		$files = scandir( $this->path );
-		$files = array_diff( $files, [ '.', '..' ] );
-		$rows  = [];
-		/**
-		 * create array with all fields
-		 */
-		foreach ( $files as $file ) {
-			$path_info = pathinfo( $this->path . DIRECTORY_SEPARATOR . $file );
-
-			$ext = $path_info[ 'extension' ];
-			if ( in_array( $ext, [ 'php', 'twig' ] ) ) {
-				$rows[ $path_info[ 'filename' ] ][ $ext ] = $path_info;
+		$rows = RowsHelper::scanPath( $this->path );
+		foreach ( $rows as $key => &$row ) {
+			if ( isset( $row[ 'php' ] ) ) {
+				$path_to_fields = $row[ 'php' ][ 'dirname' ] . DIRECTORY_SEPARATOR . $row[ 'php' ][ 'basename' ];
+				$row            = include $path_to_fields;
+				if ( ! $row instanceof RowEditor ) {
+					unset( $rows[ $key ] );
+				}
+				$row = $row->getFields();
+			} else {
+				unset( $rows[ $key ] );
 			}
 		}
+		$this->rows = $rows;
+	}
 
-		foreach ( $rows as &$row ) {
-			$row = new Row($row);
-		}
+	/**
+	 * @return string|array
+	 */
+	public function getVueJson( $json = false ) {
+		$data = [
+			'namespace' => $this->namespace,
+			'rows'      => $this->rows,
 
+		];
 
-		ConsoleHelper::log( $rows);
-
+		return $json ? json_encode( $data ) : $data;
 	}
 
 }
